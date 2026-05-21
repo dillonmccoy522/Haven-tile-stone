@@ -7,136 +7,147 @@
 <title>About Donovan | Haven Tile & Stone — Ocean Isle Beach NC</title>
 <meta name="description" content="Meet Donovan, owner of Haven Tile & Stone. 15+ years of luxury tile and stone installation across Ocean Isle Beach, Holden Beach, and Brunswick County, NC.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+/* ── RESET & VARIABLES ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --dark:#0C0C0C; --dark-2:#111111; --dark-3:#181818; --dark-4:#222222;
-  --gold:#C8A96A; --gold-lt:#D9BF8A; --gold-dim:rgba(200,169,106,0.12);
-  --white:#FAFAFA; --w70:rgba(250,250,250,0.7); --w40:rgba(250,250,250,0.4);
-  --w15:rgba(250,250,250,0.06); --border:rgba(200,169,106,0.18);
+  --dark:     #0C0C0C; --dark-2:   #111111; --dark-3:   #141414; --dark-4:   #222222;
+  --gold:     #C8A96A; --gold-lt:  #D9BF8A; --gold-dim: rgba(200,169,106,0.10);
+  --white:    #FAFAFA; --w70:      rgba(250,250,250,0.7); --w40:      rgba(250,250,250,0.4);
+  --w15:      rgba(250,250,250,0.06); --border:   rgba(200,169,106,0.18);
 }
-html { scroll-behavior:smooth; }
-body { font-family:'DM Sans',sans-serif; background:var(--dark); color:var(--white); }
-
-/* NAV */
-nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:22px 60px; transition:background 0.3s,padding 0.3s,border-color 0.3s; background:rgba(12,12,12,0); border-bottom:1px solid transparent; }
-nav.scrolled { background:rgba(12,12,12,0.95); backdrop-filter:blur(16px); border-color:var(--border); padding:16px 60px; }
-.nav-logo { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:600; color:var(--gold); text-decoration:none; letter-spacing:0.02em; }
-.nav-logo span { color:var(--white); }
-.nav-links { display:flex; gap:36px; list-style:none; align-items:center; }
-.nav-links a { text-decoration:none; color:var(--w70); font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
-.nav-links a:hover, .nav-links a.active { color:var(--gold); }
-.nav-cta { border:1px solid var(--gold) !important; color:var(--gold) !important; padding:9px 22px; transition:all 0.2s !important; }
-.nav-cta:hover { background:var(--gold) !important; color:var(--dark) !important; }
-
-/* REVEAL */
-.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
-.reveal.visible { opacity:1; transform:none; }
-
-/* HERO */
-.about-hero {
-  position:relative; height:70vh; min-height:520px;
-  display:flex; align-items:flex-end; overflow:hidden;
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; } .reveal-delay-2 { transition-delay: 0.2s; } .reveal-delay-3 { transition-delay: 0.3s; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 26px 52px; transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s ease; border-bottom: 1px solid transparent; }
+nav.scrolled { padding: 16px 52px; background: rgba(12,12,12,0.96); backdrop-filter: blur(20px); border-color: var(--border); }
+.nav-left  { display: flex; gap: 32px; align-items: center; justify-content: flex-start; }
+.nav-right { display: flex; gap: 28px; align-items: center; justify-content: flex-end; }
+.nav-logo { text-align: center; font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.05em; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--gold); }
+.nav-link { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w70); text-decoration: none; transition: color 0.2s; }
+.nav-link:hover { color: var(--gold); }
+.nav-cta { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dark); background: var(--gold); padding: 9px 22px; border-radius: 1px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+.nav-cta:hover { opacity: 0.88; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+.nav-mobile-menu { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(12,12,12,0.98); backdrop-filter: blur(20px); flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); text-decoration: none; transition: color 0.2s; }
+.nav-mobile-menu a:hover { color: var(--gold); }
+.nav-mobile-close { position: absolute; top: 28px; right: 40px; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: var(--w40); }
+.hero { position: relative; min-height: 82vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding: 140px 60px 80px; }
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(12,12,12,0.55) 0%, rgba(12,12,12,0.3) 50%, rgba(12,12,12,0.82) 100%); }
+.hero > *:not(.hero-media):not(.hero-overlay):not(.hero-badges):not(.hero-scroll) { position: relative; z-index: 2; }
+.hero-badges { position: absolute; right: 52px; top: 50%; transform: translateY(-50%); z-index: 2; display: flex; flex-direction: column; gap: 10px; }
+.hero-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(200,169,106,0.25); border-radius: 20px; padding: 6px 16px; margin-bottom: 28px; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(200,169,106,0.85); }
+.hero-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 4.8rem; font-weight: 700; line-height: 1.0; letter-spacing: -0.01em; max-width: 680px; }
+.hero-title em { font-style: italic; color: var(--gold); display: block; }
+.hero-sub { font-size: 0.9rem; color: var(--w40); line-height: 1.8; max-width: 420px; margin: 24px auto 0; }
+.hero-ctas { display: flex; gap: 14px; align-items: center; justify-content: center; margin-top: 38px; flex-wrap: wrap; }
+.btn-primary { background: var(--gold); color: var(--dark); padding: 15px 36px; font-size: 0.73rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; border-radius: 1px; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+.btn-primary:hover { opacity: 0.88; }
+.btn-ghost { border: 1px solid rgba(200,169,106,0.35); color: var(--gold); padding: 15px 36px; font-size: 0.73rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 1px; text-decoration: none; display: inline-block; transition: border-color 0.2s; }
+.btn-ghost:hover { border-color: var(--gold); }
+.badge { background: rgba(12,12,12,0.85); border: 1px solid rgba(200,169,106,0.25); backdrop-filter: blur(12px); padding: 12px 18px; border-radius: 3px; text-align: center; min-width: 92px; }
+.badge-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); line-height: 1; }
+.badge-lbl { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w40); margin-top: 3px; }
+.ticker { background: var(--gold); padding: 11px 0; overflow: hidden; white-space: nowrap; }
+.ticker-track { display: inline-flex; gap: 36px; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dark); animation: ticker-scroll 22s linear infinite; }
+.ticker-sep { color: rgba(0,0,0,0.25); }
+@keyframes ticker-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.section { padding: 72px 60px; } .section-sm { padding: 52px 60px; }
+.section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.section-eyebrow::before { content: '— '; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; line-height: 1.1; }
+.section-title em { font-style: italic; color: var(--gold); }
+.bento { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 260px 200px; gap: 3px; background: rgba(200,169,106,0.08); border-radius: 3px; overflow: hidden; margin-top: 36px; }
+.bc { background: var(--dark-3); overflow: hidden; position: relative; }
+.bc.photo-main { grid-row: span 2; display: flex; align-items: flex-end; padding: 28px; }
+.bc.photo-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.bc.photo-main:hover img { transform: scale(1.03); }
+.bc.photo-main > *:not(img) { position: relative; z-index: 1; }
+.photo-caption-tag { background: rgba(12,12,12,0.75); backdrop-filter: blur(8px); border: 1px solid rgba(200,169,106,0.2); padding: 8px 14px; border-radius: 2px; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.bc.accent { background: var(--gold); display: flex; flex-direction: column; justify-content: space-between; padding: 28px 26px; }
+.bc.accent h3 { font-family: 'Playfair Display', serif; font-size: 1.65rem; color: var(--dark); font-weight: 700; line-height: 1.15; }
+.bc.accent p { font-size: 0.73rem; color: rgba(0,0,0,0.55); line-height: 1.55; }
+.bc.accent .bc-arrow { font-size: 1.3rem; color: rgba(0,0,0,0.3); align-self: flex-end; }
+.bc.stat { display: flex; flex-direction: column; justify-content: center; padding: 28px 26px; }
+.bc-num { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--gold); line-height: 1; }
+.bc-num-label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w40); margin-top: 6px; }
+.bc.service { padding: 26px; display: flex; flex-direction: column; justify-content: space-between; }
+.bc-tag { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: rgba(200,169,106,0.1); border: 1px solid rgba(200,169,106,0.2); padding: 4px 10px; border-radius: 2px; width: fit-content; }
+.bc.service h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; line-height: 1.2; margin-top: 10px; }
+.bc.service h3 em { font-style: italic; color: var(--gold); }
+.bc.service p { font-size: 0.73rem; color: var(--w40); line-height: 1.55; }
+.bc-link { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; transition: color 0.2s; }
+.bc-link:hover { color: var(--gold-lt); }
+.bc.photo-mini { display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.bc.photo-mini img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.bc.photo-mini:hover img { transform: scale(1.04); }
+.video-section { padding: 0; background: var(--dark-2); }
+.video-section video { width: 100%; display: block; max-height: 540px; object-fit: cover; }
+.areas-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; background: rgba(200,169,106,0.08); border-radius: 3px; overflow: hidden; margin-top: 36px; }
+.area-card { background: var(--dark-3); padding: 32px 26px; }
+.area-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 8px; }
+.area-card p { font-size: 0.78rem; color: var(--w40); line-height: 1.6; }
+.area-card a { display: inline-block; margin-top: 12px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+.area-card a:hover { color: var(--gold-lt); }
+.testimonials { padding: 72px 60px; background: #0f0f0f; border-top: 1px solid rgba(200,169,106,0.08); }
+.t-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; background: rgba(200,169,106,0.06); border-radius: 2px; overflow: hidden; margin-top: 36px; }
+.t-card { background: var(--dark-3); padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; }
+.t-stars { color: var(--gold); font-size: 0.78rem; letter-spacing: 2px; }
+.t-quote { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; line-height: 1.65; color: var(--w70); flex: 1; }
+.t-author { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w40); padding-top: 14px; border-top: 1px solid rgba(200,169,106,0.1); }
+.cta-band { padding: 72px 60px; background: linear-gradient(135deg, #111 0%, #141a18 100%); border-top: 1px solid rgba(200,169,106,0.1); display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.cta-band h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1.1; }
+.cta-band h2 em { font-style: italic; color: var(--gold); }
+.cta-band-right { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; flex-shrink: 0; }
+.cta-band-sub { font-size: 0.73rem; color: var(--w40); }
+.cta-band-sub a { color: var(--gold); text-decoration: none; }
+footer { background: var(--dark); border-top: 1px solid var(--border); padding: 56px 60px 36px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
+.footer-brand h3 span { color: var(--gold); }
+.footer-brand p { font-size: 0.8rem; color: var(--w40); line-height: 1.7; max-width: 220px; }
+.footer-col h4 { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 0.8rem; color: var(--w40); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(200,169,106,0.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; }
+.footer-copy { font-size: 0.72rem; color: var(--w40); }
+.footer-phone { font-size: 0.8rem; color: var(--gold); text-decoration: none; letter-spacing: 0.06em; }
+@media (max-width: 768px) {
+  nav { grid-template-columns: 1fr auto; padding: 20px 24px; }
+  .nav-left, .nav-right { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero { padding: 100px 28px 60px; min-height: 80svh; }
+  .hero-title { font-size: 2.8rem; }
+  .hero-badges { display: none; }
+  .section, .section-sm, .testimonials, .cta-band { padding: 48px 24px; }
+  .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .bc.photo-main { grid-row: span 1; min-height: 240px; }
+  .areas-grid { grid-template-columns: 1fr 1fr; }
+  .t-grid { grid-template-columns: 1fr; }
+  .cta-band { flex-direction: column; text-align: center; align-items: center; }
+  .cta-band-right { align-items: center; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
-.about-hero-bg {
-  position:absolute; inset:0;
-  background:url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc8cbb9a348d9a24bf080.jpeg') center/cover no-repeat;
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.2rem; }
+  .hero-ctas { flex-direction: column; width: 100%; }
+  .bento { grid-template-columns: 1fr; }
+  .areas-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 1.9rem; }
+  .cta-band h2 { font-size: 1.9rem; }
 }
-.about-hero-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(12,12,12,0.92) 0%, rgba(12,12,12,0.4) 50%, rgba(12,12,12,0.1) 100%);
-}
-.about-hero-content { position:relative; z-index:2; padding:0 60px 64px; }
-.about-hero-content .eyebrow { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:18px; }
-.about-hero-content h1 { font-family:'Playfair Display',serif; font-size:clamp(2.6rem,5.5vw,4.2rem); color:var(--white); line-height:1.05; }
-.about-hero-content h1 em { font-style:italic; }
-.gold-rule { width:48px; height:1px; background:var(--gold); margin-top:24px; }
-
-/* INTRO SPLIT */
-.intro-split { display:grid; grid-template-columns:3fr 5fr; min-height:400px; }
-.intro-image { overflow:hidden; }
-.intro-image img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.8s ease; }
-.intro-image:hover img { transform:scale(1.03); }
-.intro-content { background:var(--dark-3); padding:80px 64px; display:flex; flex-direction:column; justify-content:center; border-left:1px solid var(--border); }
-.intro-content .section-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; display:block; margin-bottom:16px; }
-.intro-content h2 { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3vw,2.7rem); color:var(--white); line-height:1.15; margin-bottom:28px; }
-.intro-content h2 em { font-style:italic; }
-.intro-content p { font-size:0.96rem; line-height:1.85; color:var(--w70); font-weight:300; margin-bottom:16px; }
-.intro-content p:last-of-type { margin-bottom:36px; }
-.btn-gold { background:var(--gold); color:var(--dark); padding:14px 32px; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; font-weight:500; transition:background 0.2s; display:inline-block; }
-.btn-gold:hover { background:var(--gold-lt); }
-.btn-outline-gold { border:1px solid var(--gold); color:var(--gold); padding:14px 32px; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; font-weight:500; transition:all 0.2s; display:inline-block; }
-.btn-outline-gold:hover { background:var(--gold-dim); }
-
-/* STATS BAR */
-.stats-bar { background:var(--dark-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:52px 60px; display:flex; justify-content:space-around; gap:40px; flex-wrap:wrap; }
-.stat-item { text-align:center; }
-.stat-num { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; color:var(--white); line-height:1; }
-.stat-gold-line { width:32px; height:1px; background:var(--gold); margin:12px auto; }
-.stat-label { font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--w40); }
-
-/* VIDEO SECTION */
-.video-section { padding:100px 60px; background:var(--dark-3); border-bottom:1px solid var(--border); }
-.video-header { text-align:center; margin-bottom:56px; }
-.video-header .section-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; display:block; margin-bottom:16px; }
-.video-header h2 { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3vw,2.7rem); color:var(--white); }
-.video-header h2 em { font-style:italic; }
-.video-header p { font-size:0.95rem; color:var(--w40); line-height:1.75; max-width:500px; margin:16px auto 0; font-weight:300; }
-.video-wrapper { position:relative; max-width:900px; margin:0 auto; background:var(--dark); aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border); }
-.video-wrapper video { width:100%; height:100%; display:block; }
-
-/* STORY / VALUES */
-.story-section { padding:100px 60px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; background:var(--dark-2); border-bottom:1px solid var(--border); }
-.story-content .section-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; display:block; margin-bottom:16px; }
-.story-content h2 { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3vw,2.5rem); color:var(--white); margin-bottom:28px; line-height:1.15; }
-.story-content h2 em { font-style:italic; }
-.story-content p { font-size:0.96rem; line-height:1.85; color:var(--w70); font-weight:300; margin-bottom:18px; }
-.story-values { display:flex; flex-direction:column; padding-top:4px; }
-.value-item { padding:28px 0; border-bottom:1px solid var(--border); display:flex; gap:22px; align-items:flex-start; }
-.value-item:first-child { padding-top:0; border-top:1px solid var(--border); }
-.value-num { font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--gold); line-height:1; flex-shrink:0; width:40px; opacity:0.7; }
-.value-item h3 { font-family:'Playfair Display',serif; font-size:1.08rem; color:var(--white); margin-bottom:8px; }
-.value-item p { font-size:0.87rem; color:var(--w40); line-height:1.7; }
-
-/* AREAS SERVED */
-.areas-section { background:var(--dark-3); padding:80px 60px; border-bottom:1px solid var(--border); }
-.areas-section .section-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:16px; }
-.areas-section h2 { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3vw,2.5rem); color:var(--white); margin-bottom:12px; }
-.areas-section h2 em { font-style:italic; }
-.areas-section > p { font-size:0.95rem; color:var(--w40); margin-bottom:48px; font-weight:300; max-width:520px; line-height:1.7; }
-.areas-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); }
-.area-card { background:var(--dark-2); padding:32px 28px; transition:background 0.2s; }
-.area-card:hover { background:var(--dark-4); }
-.area-card h3 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--white); margin-bottom:8px; }
-.area-card p { font-size:0.8rem; color:var(--w40); line-height:1.6; }
-.area-card a { display:inline-block; margin-top:14px; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); text-decoration:none; }
-.area-card a:hover { color:var(--gold-lt); }
-
-/* TESTIMONIALS */
-.testimonials-section { padding:80px 60px; background:var(--dark); border-bottom:1px solid var(--border); }
-.testimonials-section .section-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; display:block; margin-bottom:16px; }
-.testimonials-section h2 { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3vw,2.5rem); color:var(--white); margin-bottom:48px; }
-.testimonials-section h2 em { font-style:italic; }
-.t-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
-.t-card { background:var(--dark-2); padding:40px 36px; border-top:2px solid var(--gold); }
-.t-stars { color:var(--gold); margin-bottom:20px; font-size:0.9rem; letter-spacing:2px; }
-.t-text { font-family:'Playfair Display',serif; font-style:italic; font-size:1rem; color:var(--w70); line-height:1.75; margin-bottom:24px; }
-.t-author { font-size:0.75rem; color:var(--white); letter-spacing:0.1em; text-transform:uppercase; font-weight:500; }
-.t-location { font-size:0.7rem; color:var(--gold); margin-top:5px; }
-
-/* CTA */
-.cta-section { padding:100px 60px; text-align:center; background:var(--dark-3); }
-.cta-section .section-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:500; display:block; margin-bottom:16px; }
-.cta-section h2 { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,3.5vw,2.8rem); color:var(--white); margin-bottom:16px; }
-.cta-section h2 em { font-style:italic; }
-.cta-section p { font-size:0.96rem; color:var(--w40); line-height:1.75; max-width:500px; margin:0 auto 40px; font-weight:300; }
-.cta-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-
-/* FOOTER */
-footer { background:var(--dark-2); border-top:1px solid var(--border); padding:28px 60px; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--w40); flex-wrap:wrap; gap:12px; }
-footer a { color:var(--w40); text-decoration:none; transition:color 0.2s; }
-footer a:hover { color:var(--gold); }
 </style>
 <link rel="canonical" href="https://haventileandstone.com/about.html">
 <meta property="og:type" content="website">
@@ -187,224 +198,198 @@ footer a:hover { color:var(--gold); }
 </head>
 <body>
 
-<nav id="nav">
-  <a href="mockup-homepage.html" class="nav-logo">Haven <span>Tile &amp; Stone</span></a>
-  <ul class="nav-links">
-    <li><a href="mockup-homepage.html#services">Services</a></li>
-    <li><a href="gallery.html">Portfolio</a></li>
-    <li><a href="about.html" class="active">About</a></li>
-    <li><a href="mockup-homepage.html#locations">Areas Served</a></li>
-    <li><a href="mockup-homepage.html#contact" class="nav-cta">Get a Quote</a></li>
-  </ul>
+<div class="nav-mobile-menu">
+  <button class="nav-mobile-close">✕</button>
+  <a href="mockup-homepage.html">Home</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="bathroom-remodeling.html">Bathrooms</a>
+  <a href="kitchen-remodeling.html">Kitchens</a>
+  <a href="whole-home-flooring.html">Flooring</a>
+  <a href="mockup-homepage.html#contact">Contact</a>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <a class="nav-link" href="gallery.html">Gallery</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link" href="mockup-homepage.html#services">Services</a>
+  </div>
+  <a class="nav-logo" href="mockup-homepage.html">Haven <span>&</span> Stone</a>
+  <div class="nav-right">
+    <a class="nav-link" href="ocean-isle-beach.html">Areas Served</a>
+    <a class="nav-link" href="mockup-homepage.html#reviews">Reviews</a>
+    <a class="nav-cta" href="mockup-homepage.html#contact">Free Consultation</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO -->
-<div class="about-hero">
-  <div class="about-hero-bg"></div>
-  <div class="about-hero-overlay"></div>
-  <div class="about-hero-content">
-    <span class="eyebrow">About Haven Tile &amp; Stone</span>
-    <h1>Built on <em>Craft,</em><br>Not Corners</h1>
-    <div class="gold-rule"></div>
+<div class="hero">
+  <div class="hero-media">
+    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc8cbb9a348d9a24bf080.jpeg" alt="Donovan Haven — master tile installer Ocean Isle Beach NC">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-pill"><div class="hero-pill-dot"></div>Owner &amp; Installer &nbsp;·&nbsp; Ocean Isle Beach NC</div>
+  <h1 class="hero-title">Built on<br><em>Craft.</em></h1>
+  <p class="hero-sub">15 years of precision. Every project personally overseen by Donovan — no subcontractors, no shortcuts.</p>
+  <div class="hero-ctas">
+    <a class="btn-primary" href="mockup-homepage.html#contact">Start a Project</a>
+    <a class="btn-ghost" href="gallery.html">View the Work →</a>
+  </div>
+  <div class="hero-badges">
+    <div class="badge"><div class="badge-num">15+</div><div class="badge-lbl">Yrs Experience</div></div>
+    <div class="badge"><div class="badge-num">5.0★</div><div class="badge-lbl">Google Rating</div></div>
+    <div class="badge"><div class="badge-num">500+</div><div class="badge-lbl">Projects Done</div></div>
   </div>
 </div>
 
-<!-- INTRO SPLIT -->
-<div class="intro-split">
-  <div class="intro-image">
-    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/ybcGWx8BfgvrYufxSFfe/media/6980ac39f7a877bb1540dcad.jpeg" alt="Donovan — Haven Tile and Stone owner, Ocean Isle Beach NC">
-  </div>
-  <div class="intro-content reveal">
-    <span class="section-label">Meet Donovan</span>
-    <h2>The Craftsman<br><em>Behind Every Project</em></h2>
-    <p>Haven Tile &amp; Stone was founded by Donovan on a belief that has guided every project since day one: luxury homes deserve luxury craftsmanship, and there are no shortcuts worth taking.</p>
-    <p>With over 15 years of experience installing tile and stone along the Carolina coast, Donovan has built a reputation that speaks for itself — homeowners from Ocean Isle Beach to Myrtle Beach trust him with their most significant investments because he treats every project like it's his own home.</p>
-    <p>Donovan personally oversees every Haven Tile &amp; Stone project. He's on-site, hands-on, and available to his clients from the first consultation to the final walkthrough. When you hire Haven Tile &amp; Stone, you get Donovan — not a crew you've never met.</p>
-    <a href="mockup-homepage.html#contact" class="btn-gold">Start Your Project</a>
+<div class="ticker">
+  <div class="ticker-track">
+    15+ Years Experience <span class="ticker-sep">✦</span> Owner on Every Job <span class="ticker-sep">✦</span> No Subcontractors <span class="ticker-sep">✦</span> 5.0 Stars <span class="ticker-sep">✦</span> Bathroom Tile <span class="ticker-sep">✦</span> Kitchen Tile <span class="ticker-sep">✦</span> Whole-Home Flooring <span class="ticker-sep">✦</span> Ocean Isle Beach <span class="ticker-sep">✦</span> Brunswick County <span class="ticker-sep">✦</span>&nbsp;
+    15+ Years Experience <span class="ticker-sep">✦</span> Owner on Every Job <span class="ticker-sep">✦</span> No Subcontractors <span class="ticker-sep">✦</span> 5.0 Stars <span class="ticker-sep">✦</span> Bathroom Tile <span class="ticker-sep">✦</span> Kitchen Tile <span class="ticker-sep">✦</span> Whole-Home Flooring <span class="ticker-sep">✦</span> Ocean Isle Beach <span class="ticker-sep">✦</span> Brunswick County <span class="ticker-sep">✦</span>&nbsp;
   </div>
 </div>
 
-<!-- STATS BAR -->
-<div class="stats-bar reveal">
-  <div class="stat-item">
-    <div class="stat-num">15+</div>
-    <div class="stat-gold-line"></div>
-    <div class="stat-label">Years of Experience</div>
+<section class="section reveal">
+  <div class="section-eyebrow">The Story</div>
+  <h2 class="section-title">One installer.<br><em>Every project.</em></h2>
+  <div class="bento">
+    <div class="bc photo-main">
+      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc8cbb9a348d9a24bf080.jpeg" alt="Donovan Haven tile installation">
+      <span class="photo-caption-tag">Donovan · Ocean Isle Beach</span>
+    </div>
+    <div class="bc accent">
+      <h3>15 Years.<br>Zero<br>Shortcuts.</h3>
+      <p>Every tile set by hand. Donovan personally on every job from demo to final grout.</p>
+      <span class="bc-arrow">→</span>
+    </div>
+    <div class="bc stat">
+      <div class="bc-num">8</div>
+      <div class="bc-num-label">Service Areas</div>
+    </div>
+    <div class="bc service">
+      <div>
+        <span class="bc-tag">Philosophy</span>
+        <h3>"If I wouldn't<br><em>live with it,</em>"</h3>
+      </div>
+      <div>
+        <p>"I won't install it. That's the standard on every single project."</p>
+        <span style="font-size:0.65rem;color:var(--gold);letter-spacing:0.08em;">— Donovan Haven</span>
+      </div>
+    </div>
+    <div class="bc photo-mini">
+      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc8cb6cc77d71816e3843.jpeg" alt="Custom tile work detail">
+    </div>
   </div>
-  <div class="stat-item">
-    <div class="stat-num">350+</div>
-    <div class="stat-gold-line"></div>
-    <div class="stat-label">Projects Completed</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">100%</div>
-    <div class="stat-gold-line"></div>
-    <div class="stat-label">Client Satisfaction</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">5★</div>
-    <div class="stat-gold-line"></div>
-    <div class="stat-label">Google Rating</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">3</div>
-    <div class="stat-gold-line"></div>
-    <div class="stat-label">Counties Served</div>
-  </div>
-</div>
+</section>
 
-<!-- VIDEO SECTION -->
 <div class="video-section reveal">
-  <div class="video-header">
-    <span class="section-label">See the Work</span>
-    <h2>Watch Donovan <em>in Action</em></h2>
-    <p>A behind-the-scenes look at the craftsmanship and attention to detail that goes into every Haven Tile &amp; Stone project.</p>
-  </div>
-  <div class="video-wrapper">
-    <video controls playsinline preload="none" poster="">
-      <source src="work-highlight-nosubs.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video autoplay muted loop playsinline>
+    <source src="work-highlight-nosubs.mp4" type="video/mp4">
+  </video>
 </div>
 
-<!-- STORY / VALUES -->
-<div class="story-section">
-  <div class="story-content reveal">
-    <span class="section-label">Our Story</span>
-    <h2>Why Haven Tile<br><em>&amp; Stone Exists</em></h2>
-    <p>Donovan started Haven Tile &amp; Stone after years in the trades watching homeowners get burned by contractors who cut corners on the work that matters most — the substrate prep, the waterproofing, the leveling, the layout planning. The visible work looks fine; the invisible work fails within years.</p>
-    <p>He built Haven Tile &amp; Stone to be different. Every installation starts with a foundation that would make another tile contractor nervous — because Donovan knows that what's underneath the tile determines whether it looks perfect for two years or twenty.</p>
-    <p>Today, Haven Tile &amp; Stone is the contractor of choice for discerning homeowners across the Carolina coast — people who've been let down before and aren't willing to compromise again.</p>
-  </div>
-  <div class="story-values reveal">
-    <div class="value-item">
-      <div class="value-num">01</div>
-      <div>
-        <h3>Craftsmanship Over Speed</h3>
-        <p>We never rush. Every layout is planned, every substrate is prepared, every tile is set with the same deliberate care — regardless of project size.</p>
-      </div>
-    </div>
-    <div class="value-item">
-      <div class="value-num">02</div>
-      <div>
-        <h3>Radical Transparency</h3>
-        <p>You get a detailed written estimate before work begins. No surprises, no scope creep, no hidden costs. What we quote is what you pay.</p>
-      </div>
-    </div>
-    <div class="value-item">
-      <div class="value-num">03</div>
-      <div>
-        <h3>Coastal Expertise</h3>
-        <p>15+ years working in coastal NC environments means we know which materials and methods hold up to salt air, humidity, and wet-dry cycles — and which ones don't.</p>
-      </div>
-    </div>
-    <div class="value-item">
-      <div class="value-num">04</div>
-      <div>
-        <h3>Personal Accountability</h3>
-        <p>Donovan is on every job. You have his direct number. When a question comes up — before, during, or after the project — you talk to him, not a receptionist.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- AREAS SERVED -->
-<div class="areas-section reveal">
-  <span class="section-label">Where We Work</span>
-  <h2>Serving the <em>Carolina Coast</em></h2>
-  <p>Haven Tile &amp; Stone works with luxury homeowners throughout Brunswick and New Hanover County and into the Grand Strand.</p>
+<section class="section reveal" style="background: var(--dark-2); border-top: 1px solid rgba(200,169,106,0.08);">
+  <div class="section-eyebrow">Service Area</div>
+  <h2 class="section-title">8 communities.<br><em>One standard.</em></h2>
   <div class="areas-grid">
-    <div class="area-card">
-      <h3>Ocean Isle Beach, NC</h3>
-      <p>Our home base — bathroom, kitchen, and flooring installations throughout OIB and surrounding communities.</p>
-      <a href="ocean-isle-beach.html">Learn More &rarr;</a>
+    <div class="area-card reveal reveal-delay-1">
+      <h3>Ocean Isle Beach</h3>
+      <p>Home base. Serving luxury coastal homes with full-scope tile installations.</p>
+      <a href="ocean-isle-beach.html">Learn More →</a>
     </div>
-    <div class="area-card">
-      <h3>Holden Beach, NC</h3>
-      <p>Luxury vacation homes and primary residences along the Holden Beach strip and canal communities.</p>
-      <a href="holden-beach.html">Learn More &rarr;</a>
+    <div class="area-card reveal reveal-delay-2">
+      <h3>Holden Beach</h3>
+      <p>Beachfront and canal-front homes. Custom bathroom and kitchen tile.</p>
+      <a href="holden-beach.html">Learn More →</a>
     </div>
-    <div class="area-card">
-      <h3>Sunset Beach, NC</h3>
-      <p>High-end tile work throughout Sunset Beach, Bird Island, and the Calabash corridor.</p>
-      <a href="sunset-beach.html">Learn More &rarr;</a>
+    <div class="area-card reveal reveal-delay-3">
+      <h3>Sunset Beach</h3>
+      <p>Retirement communities and vacation homes along the intracoastal.</p>
+      <a href="sunset-beach.html">Learn More →</a>
     </div>
-    <div class="area-card">
-      <h3>Brunswick County, NC</h3>
-      <p>Full-county coverage — Shallotte, Bolivia, Supply, Leland, and all communities in between.</p>
-      <a href="brunswick-county.html">Learn More &rarr;</a>
+    <div class="area-card reveal">
+      <h3>Brunswick County</h3>
+      <p>Full county coverage — beaches, mainland, new construction and remodels.</p>
+      <a href="brunswick-county.html">Learn More →</a>
     </div>
-    <div class="area-card">
-      <h3>Calabash &amp; Shallotte, NC</h3>
-      <p>Serving the Calabash waterfront and Shallotte's growing luxury residential market.</p>
-      <a href="calabash.html">Learn More &rarr;</a>
+    <div class="area-card reveal reveal-delay-1">
+      <h3>Myrtle Beach</h3>
+      <p>Grand Strand luxury homes and high-end remodels across the SC border.</p>
+      <a href="myrtle-beach.html">Learn More →</a>
     </div>
-    <div class="area-card">
-      <h3>Leland &amp; Wilmington, NC</h3>
-      <p>Premium tile installations across Leland, Wilmington, and the Cape Fear region.</p>
-      <a href="leland-wilmington.html">Learn More &rarr;</a>
+    <div class="area-card reveal reveal-delay-2">
+      <h3>Calabash</h3>
+      <p>Calabash and Shallotte communities — just minutes from Ocean Isle Beach.</p>
+      <a href="calabash.html">Learn More →</a>
     </div>
-    <div class="area-card">
-      <h3>Myrtle Beach Area, SC</h3>
-      <p>Serving the Grand Strand — North Myrtle Beach, Myrtle Beach, and the border communities.</p>
-      <a href="myrtle-beach.html">Learn More &rarr;</a>
+    <div class="area-card reveal reveal-delay-3">
+      <h3>Leland &amp; Wilmington</h3>
+      <p>Cape Fear region — high-end new construction and full-home remodels.</p>
+      <a href="leland-wilmington.html">Learn More →</a>
     </div>
-    <div class="area-card">
-      <h3>Beyond the Coast</h3>
-      <p>Working on a project outside our listed areas? Reach out — Donovan considers select projects statewide.</p>
-      <a href="mockup-homepage.html#contact">Contact Us &rarr;</a>
+    <div class="area-card reveal">
+      <h3>Everywhere</h3>
+      <p>Don't see your area? Call — if it's within range, Donovan makes it work.</p>
+      <a href="tel:+19106647343">(910) 664-7343 →</a>
     </div>
   </div>
-</div>
+</section>
 
-<!-- TESTIMONIALS -->
-<div class="testimonials-section reveal">
-  <span class="section-label">What Clients Say</span>
-  <h2>Trusted by Homeowners<br><em>Across the Coast</em></h2>
+<section class="testimonials reveal">
+  <div class="section-eyebrow">What Clients Say</div>
+  <h2 class="section-title">The work speaks.<br><em>So do they.</em></h2>
   <div class="t-grid">
     <div class="t-card">
       <div class="t-stars">★★★★★</div>
-      <div class="t-text">"Donovan completely transformed our master bath. The attention to detail was unlike anything we'd seen — every tile perfectly level, every grout line immaculate. Worth every penny."</div>
-      <div class="t-author">Sarah &amp; Mark T.</div>
-      <div class="t-location">Ocean Isle Beach — Master Bath Remodel</div>
+      <div class="t-quote">"Donovan is the most meticulous contractor I've ever hired. He noticed a slight lippage in two tiles and reset them before I even said anything."</div>
+      <div class="t-author">Robert K. · Ocean Isle Beach</div>
     </div>
     <div class="t-card">
       <div class="t-stars">★★★★★</div>
-      <div class="t-text">"We've renovated three beach houses and Haven Tile is hands-down the best contractor we've ever worked with. Professional, on time, and the finished product is absolutely stunning."</div>
-      <div class="t-author">James R.</div>
-      <div class="t-location">Holden Beach — Full Bathroom &amp; Flooring</div>
+      <div class="t-quote">"We've been burned by contractors before. Donovan was different — on time, transparent, and the work was flawless. He's our guy for life."</div>
+      <div class="t-author">The Walkers · Holden Beach</div>
     </div>
     <div class="t-card">
       <div class="t-stars">★★★★★</div>
-      <div class="t-text">"From the first consultation to the final reveal, Donovan was professional, communicative, and genuinely passionate about the work. Our kitchen is a showstopper now."</div>
-      <div class="t-author">Linda M.</div>
-      <div class="t-location">Sunset Beach — Full Kitchen &amp; Flooring</div>
+      <div class="t-quote">"I called three contractors before Haven Tile. Donovan was the only one who showed up to measure the same day. Quality matched the service."</div>
+      <div class="t-author">Linda S. · Brunswick County</div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- CTA -->
-<div class="cta-section reveal">
-  <span class="section-label">Let's Work Together</span>
-  <h2>Ready to Start Your<br><em>Project?</em></h2>
-  <p>Every project begins with a free in-home consultation. Donovan will visit your home, walk through the space, and provide a detailed written estimate — no obligation, no pressure.</p>
-  <div class="cta-buttons">
-    <a href="mockup-homepage.html#contact" class="btn-gold">Request a Free Quote</a>
-    <a href="gallery.html" class="btn-outline-gold">View Our Portfolio</a>
+<div class="cta-band reveal">
+  <div>
+    <div class="section-eyebrow">Let's Talk</div>
+    <h2>Ready to work with<br><em>the best?</em></h2>
+  </div>
+  <div class="cta-band-right">
+    <a class="btn-primary" href="tel:+19106647343">Call (910) 664-7343</a>
+    <span class="cta-band-sub">Or <a href="https://formspree.io/f/mbdbgpbb">send a message</a> &nbsp;·&nbsp; Free consultation</span>
   </div>
 </div>
 
 <footer>
-  <span>© 2025 Haven Tile &amp; Stone · Ocean Isle Beach, NC · Licensed &amp; Insured</span>
-  <span><a href="mockup-homepage.html">Home</a> &nbsp;·&nbsp; <a href="gallery.html">Portfolio</a> &nbsp;·&nbsp; <a href="#">Privacy Policy</a></span>
+  <div class="footer-grid">
+    <div class="footer-brand"><h3>Haven <span>&</span> Stone</h3><p>Luxury tile installation for coastal Carolina homeowners. Ocean Isle Beach to Wilmington.</p></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="kitchen-remodeling.html">Kitchen Tile</a></li><li><a href="whole-home-flooring.html">Whole-Home Flooring</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+    <div class="footer-col"><h4>Areas Served</h4><ul><li><a href="ocean-isle-beach.html">Ocean Isle Beach</a></li><li><a href="holden-beach.html">Holden Beach</a></li><li><a href="sunset-beach.html">Sunset Beach</a></li><li><a href="brunswick-county.html">Brunswick County</a></li><li><a href="myrtle-beach.html">Myrtle Beach</a></li><li><a href="calabash.html">Calabash</a></li><li><a href="leland-wilmington.html">Leland &amp; Wilmington</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+19106647343">(910) 664-7343</a></li><li><a href="mailto:donovan@haventileandstone.com">Send a Message</a></li><li><a href="https://g.page/r/CXnR3KwYfLPuEBM/review" target="_blank" rel="noopener">Leave a Review</a></li><li><a href="about.html">About Donovan</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 Haven Tile &amp; Stone · Ocean Isle Beach, NC</span><a class="footer-phone" href="tel:+19106647343">(910) 664-7343</a></div>
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
-
-  const ro = new IntersectionObserver((entries) => entries.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); ro.unobserve(x.target); } }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const hamburger = document.querySelector('.nav-hamburger');
+const mobileMenu = document.querySelector('.nav-mobile-menu');
+const mobileClose = document.querySelector('.nav-mobile-close');
+hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 </script>
 </body>
 </html>

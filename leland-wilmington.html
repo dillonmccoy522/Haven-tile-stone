@@ -10,312 +10,132 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--dark:#0C0C0C;--dark-2:#111111;--dark-3:#181818;--dark-4:#222222;--gold:#C8A96A;--gold-lt:#D9BF8A;--gold-dim:rgba(200,169,106,0.12);--white:#FAFAFA;--w70:rgba(250,250,250,0.7);--w40:rgba(250,250,250,0.4);--w15:rgba(250,250,250,0.06);--border:rgba(200,169,106,0.18)}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
+:root{--dark:#0C0C0C;--dark-2:#111111;--dark-3:#141414;--dark-4:#222222;--gold:#C8A96A;--gold-lt:#D9BF8A;--gold-dim:rgba(200,169,106,0.10);--white:#FAFAFA;--w70:rgba(250,250,250,0.7);--w40:rgba(250,250,250,0.4);--w15:rgba(250,250,250,0.06);--border:rgba(200,169,106,0.18)}
+html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:0.1s}.reveal-delay-2{transition-delay:0.2s}.reveal-delay-3{transition-delay:0.3s}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;transition:padding 0.4s,background 0.4s,border-color 0.4s;border-bottom:1px solid transparent}
-nav.scrolled{padding:16px 60px;background:rgba(12,12,12,0.96);backdrop-filter:blur(20px);border-color:var(--border)}
-.nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--white)}
-.nav-logo span{color:var(--gold)}
-.nav-links{display:flex;gap:40px;list-style:none;align-items:center}
-.nav-links a{font-size:0.8rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--w70);transition:color 0.2s}
-.nav-links a:hover{color:var(--gold)}
-.nav-cta{color:var(--dark)!important;background:var(--gold);padding:10px 26px;font-size:0.75rem!important;letter-spacing:0.1em!important;transition:background 0.2s!important}
-.nav-cta:hover{background:var(--gold-lt)!important;color:var(--dark)!important}
-.breadcrumb{padding:88px 60px 20px;font-size:0.75rem;color:var(--w40);letter-spacing:0.08em}
-.breadcrumb a{color:var(--gold)}
-.hero{position:relative;height:72vh;min-height:540px;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc88de6c7ab9336c0006e.jpeg') center/cover no-repeat}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(12,12,12,0.82) 0%,rgba(12,12,12,0.45) 60%,rgba(12,12,12,0.2) 100%)}
-.hero-content{position:relative;z-index:2;padding:0 80px;max-width:760px}
-.hero-line{width:44px;height:1px;background:var(--gold);margin-bottom:24px}
-.hero-eyebrow{font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:20px;display:block}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.08;font-weight:600;color:var(--white);margin-bottom:24px;letter-spacing:-0.01em}
-.hero h1 em{font-style:italic;color:var(--gold-lt)}
-.hero-sub{font-size:1rem;line-height:1.75;color:var(--w70);max-width:500px;margin-bottom:40px;font-weight:300}
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
-.btn-primary{background:var(--gold);color:var(--dark);padding:15px 38px;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;border-radius:1px;transition:background 0.2s,transform 0.2s;font-family:'DM Sans',sans-serif;font-weight:600;display:inline-block}
-.btn-primary:hover{background:var(--gold-lt);transform:translateY(-2px)}
-.btn-ghost{border:1px solid rgba(250,250,250,0.3);color:var(--white);padding:15px 38px;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;border-radius:1px;transition:all 0.25s;font-family:'DM Sans',sans-serif;display:inline-block}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.ticker-wrap{overflow:hidden;background:var(--dark-2);padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.ticker-track{display:flex;width:max-content;animation:ticker 28s linear infinite}
-.ticker-item{display:flex;align-items:center;gap:20px;padding:0 32px;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--w70);white-space:nowrap}
-.ticker-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.section-label{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:14px}
-.section-label::before{content:'';display:block;width:28px;height:1px;background:var(--gold);flex-shrink:0}
-.geo-main{padding:80px 80px;background:var(--dark-2);display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:start}
-.geo-content h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white);line-height:1.2;margin-bottom:24px}
-.geo-content h2 em{font-style:italic;color:var(--gold-lt)}
-.geo-body{font-size:0.97rem;line-height:1.85;color:var(--w70);font-weight:300}
-.geo-body p{margin-bottom:18px}
-.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
-.service-card{background:var(--dark-3);border:1px solid var(--border);padding:28px 24px;transition:border-color 0.3s}
-.service-card:hover{border-color:rgba(200,169,106,0.4)}
-.service-card h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:8px}
-.service-card p{font-size:0.82rem;color:var(--w70);line-height:1.6;margin-bottom:14px}
-.service-card a{font-size:0.72rem;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase}
-.sidebar-card{background:var(--dark-3);border:1px solid var(--border);padding:36px 30px;margin-bottom:20px;position:sticky;top:100px}
-.sidebar-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin-bottom:14px;font-weight:600}
-.sidebar-card p{font-size:0.86rem;color:var(--w70);line-height:1.65;margin-bottom:24px}
-.sidebar-form label{display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--w40);margin-bottom:8px}
-.sidebar-form input,.sidebar-form select,.sidebar-form textarea{width:100%;padding:11px 0;border:none;border-bottom:1px solid rgba(250,250,250,0.15);font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--white);background:transparent;outline:none;transition:border-color 0.2s;margin-bottom:18px}
-.sidebar-form select option{background:var(--dark-3);color:var(--white)}
-.sidebar-form input:focus,.sidebar-form select:focus,.sidebar-form textarea:focus{border-color:var(--gold)}
-.sidebar-form textarea{height:80px;resize:none}
-.sidebar-form button{width:100%;padding:15px;background:var(--gold);color:var(--dark);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;transition:background 0.2s;border-radius:1px}
-.sidebar-form button:hover{background:var(--gold-lt)}
-.phone-cta{text-align:center;padding:24px 28px;background:var(--dark-4);border:1px solid var(--border)}
-.phone-cta p{font-size:0.75rem;color:var(--w40);margin-bottom:10px;letter-spacing:0.04em}
-.phone-cta a{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--gold);font-weight:600;display:block;transition:color 0.2s}
-.phone-cta a:hover{color:var(--gold-lt)}
-.gallery-section{padding:80px 80px;background:var(--dark-3)}
-.gallery-section-header{margin-bottom:48px}
-.gallery-section-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white)}
-.gallery-section-header h2 em{font-style:italic;color:var(--gold-lt)}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.gallery-item{overflow:hidden;height:290px}
-.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);filter:brightness(0.85)}
-.gallery-item:hover img{transform:scale(1.06);filter:brightness(0.7)}
-.testimonials-section{padding:80px 80px;background:var(--dark-2)}
-.testimonials-section-header{margin-bottom:50px}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.tcard{background:var(--w15);border:1px solid var(--border);padding:36px 28px;position:relative;transition:border-color 0.3s}
-.tcard:hover{border-color:rgba(200,169,106,0.4)}
-.quote-mark{font-family:'Playfair Display',serif;font-size:5rem;line-height:0.7;color:var(--gold);opacity:0.18;position:absolute;top:20px;right:24px;pointer-events:none}
-.stars{color:var(--gold);font-size:0.8rem;margin-bottom:16px;letter-spacing:3px}
-.tcard blockquote{font-family:'Playfair Display',serif;font-size:0.97rem;font-style:italic;color:var(--w70);line-height:1.8;margin-bottom:24px}
-.tcard .author{font-size:0.7rem;color:var(--gold-lt);letter-spacing:0.1em;text-transform:uppercase;font-weight:500}
-.tcard .location{font-size:0.67rem;color:var(--w40);margin-top:4px}
-.cta-section{padding:80px 80px;background:var(--dark);text-align:center}
-.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--white);margin-bottom:16px}
-.cta-section h2 em{font-style:italic;color:var(--gold-lt)}
-.cta-section p{color:var(--w70);font-size:0.97rem;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.75}
-footer{background:#080808;color:var(--w40);padding:50px 80px 32px;border-top:1px solid var(--border)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem}
-.footer-bottom a{color:var(--w40);transition:color 0.2s}
-.footer-bottom a:hover{color:var(--gold)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:26px 52px;transition:padding 0.4s ease,background 0.4s ease,border-color 0.4s ease;border-bottom:1px solid transparent}
+nav.scrolled{padding:16px 52px;background:rgba(12,12,12,0.96);backdrop-filter:blur(20px);border-color:var(--border)}
+.nav-left{display:flex;gap:32px;align-items:center;justify-content:flex-start}.nav-right{display:flex;gap:28px;align-items:center;justify-content:flex-end}
+.nav-logo{text-align:center;font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;letter-spacing:0.05em;color:var(--white);text-decoration:none}.nav-logo span{color:var(--gold)}
+.nav-link{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--w70);text-decoration:none;transition:color 0.2s}.nav-link:hover{color:var(--gold)}
+.nav-cta{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:9px 22px;border-radius:1px;font-weight:600;text-decoration:none;white-space:nowrap;transition:opacity 0.2s}.nav-cta:hover{opacity:0.88}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--white)}
+.nav-mobile-menu{display:none;position:fixed;inset:0;z-index:300;background:rgba(12,12,12,0.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:32px}.nav-mobile-menu.open{display:flex}
+.nav-mobile-menu a{font-family:'Playfair Display',serif;font-size:2rem;color:var(--white);text-decoration:none;transition:color 0.2s}.nav-mobile-menu a:hover{color:var(--gold)}
+.nav-mobile-close{position:absolute;top:28px;right:40px;font-size:1.5rem;cursor:pointer;background:none;border:none;color:var(--w40)}
+.hero{position:relative;min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:140px 60px 80px}
+.hero-media{position:absolute;inset:0;z-index:0}.hero-media img{width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(12,12,12,0.55) 0%,rgba(12,12,12,0.3) 50%,rgba(12,12,12,0.82) 100%)}
+.hero>*:not(.hero-media):not(.hero-overlay):not(.hero-badges){position:relative;z-index:2}
+.hero-badges{position:absolute;right:52px;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;gap:10px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(200,169,106,0.25);border-radius:20px;padding:6px 16px;margin-bottom:28px;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(200,169,106,0.85)}.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.hero-title{font-family:'Playfair Display',serif;font-size:4.2rem;font-weight:700;line-height:1.0;letter-spacing:-0.01em;max-width:720px}.hero-title em{font-style:italic;color:var(--gold);display:block}
+.hero-sub{font-size:0.9rem;color:var(--w40);line-height:1.8;max-width:420px;margin:24px auto 0}
+.hero-ctas{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:38px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--dark);padding:15px 36px;font-size:0.73rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border-radius:1px;text-decoration:none;display:inline-block;transition:opacity 0.2s}.btn-primary:hover{opacity:0.88}
+.btn-ghost{border:1px solid rgba(200,169,106,0.35);color:var(--gold);padding:15px 36px;font-size:0.73rem;letter-spacing:0.12em;text-transform:uppercase;border-radius:1px;text-decoration:none;display:inline-block;transition:border-color 0.2s}.btn-ghost:hover{border-color:var(--gold)}
+.badge{background:rgba(12,12,12,0.85);border:1px solid rgba(200,169,106,0.25);backdrop-filter:blur(12px);padding:12px 18px;border-radius:3px;text-align:center;min-width:92px}.badge-num{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold);line-height:1}.badge-lbl{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--w40);margin-top:3px}
+.ticker{background:var(--gold);padding:11px 0;overflow:hidden;white-space:nowrap}.ticker-track{display:inline-flex;gap:36px;font-size:0.65rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--dark);animation:ticker-scroll 22s linear infinite}.ticker-sep{color:rgba(0,0,0,0.25)}@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.section{padding:72px 60px}.section-sm{padding:52px 60px}
+.section-eyebrow{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.section-eyebrow::before{content:'— '}
+.section-title{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;line-height:1.1}.section-title em{font-style:italic;color:var(--gold)}
+.bento{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 200px;gap:3px;background:rgba(200,169,106,0.08);border-radius:3px;overflow:hidden;margin-top:36px}
+.bc{background:var(--dark-3);overflow:hidden;position:relative}
+.bc.photo-main{grid-row:span 2;display:flex;align-items:flex-end;padding:28px}.bc.photo-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}.bc.photo-main:hover img{transform:scale(1.03)}.bc.photo-main>*:not(img){position:relative;z-index:1}
+.photo-caption-tag{background:rgba(12,12,12,0.75);backdrop-filter:blur(8px);border:1px solid rgba(200,169,106,0.2);padding:8px 14px;border-radius:2px;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+.bc.accent{background:var(--gold);display:flex;flex-direction:column;justify-content:space-between;padding:28px 26px}.bc.accent h3{font-family:'Playfair Display',serif;font-size:1.65rem;color:var(--dark);font-weight:700;line-height:1.15}.bc.accent p{font-size:0.73rem;color:rgba(0,0,0,0.55);line-height:1.55}.bc.accent .bc-arrow{font-size:1.3rem;color:rgba(0,0,0,0.3);align-self:flex-end}
+.bc.stat{display:flex;flex-direction:column;justify-content:center;padding:28px 26px}.bc-num{font-family:'Playfair Display',serif;font-size:3.2rem;color:var(--gold);line-height:1}.bc-num-label{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--w40);margin-top:6px}
+.bc.service{padding:26px;display:flex;flex-direction:column;justify-content:space-between}.bc-tag{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);background:rgba(200,169,106,0.1);border:1px solid rgba(200,169,106,0.2);padding:4px 10px;border-radius:2px;width:fit-content}.bc.service h3{font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1.2;margin-top:10px}.bc.service h3 em{font-style:italic;color:var(--gold)}.bc.service p{font-size:0.73rem;color:var(--w40);line-height:1.55}
+.bc-link{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-top:10px;transition:color 0.2s}
+.bc.photo-mini{display:flex;align-items:center;justify-content:center;overflow:hidden}.bc.photo-mini img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}.bc.photo-mini:hover img{transform:scale(1.04)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:rgba(200,169,106,0.08);border-radius:3px;overflow:hidden;margin-top:40px}.feature-item{background:var(--dark-3);padding:36px 32px}.feature-icon{font-size:1.4rem;margin-bottom:14px}.feature-item h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:10px}.feature-item p{font-size:0.8rem;color:var(--w40);line-height:1.7}
+.testimonials{padding:72px 60px;background:#0f0f0f;border-top:1px solid rgba(200,169,106,0.08)}.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:rgba(200,169,106,0.06);border-radius:2px;overflow:hidden;margin-top:36px}.t-card{background:var(--dark-3);padding:32px 28px;display:flex;flex-direction:column;gap:14px}.t-stars{color:var(--gold);font-size:0.78rem;letter-spacing:2px}.t-quote{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;line-height:1.65;color:var(--w70);flex:1}.t-author{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--w40);padding-top:14px;border-top:1px solid rgba(200,169,106,0.1)}
+.cta-band{padding:72px 60px;background:linear-gradient(135deg,#111 0%,#141a18 100%);border-top:1px solid rgba(200,169,106,0.1);display:flex;align-items:center;justify-content:space-between;gap:40px}.cta-band h2{font-family:'Playfair Display',serif;font-size:2.4rem;line-height:1.1}.cta-band h2 em{font-style:italic;color:var(--gold)}.cta-band-right{display:flex;flex-direction:column;gap:12px;align-items:flex-end;flex-shrink:0}.cta-band-sub{font-size:0.73rem;color:var(--w40)}.cta-band-sub a{color:var(--gold);text-decoration:none}
+footer{background:var(--dark);border-top:1px solid var(--border);padding:56px 60px 36px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}.footer-brand h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;margin-bottom:12px}.footer-brand h3 span{color:var(--gold)}.footer-brand p{font-size:0.8rem;color:var(--w40);line-height:1.7;max-width:220px}.footer-col h4{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}.footer-col a{font-size:0.8rem;color:var(--w40);text-decoration:none;transition:color 0.2s}.footer-col a:hover{color:var(--gold)}.footer-bottom{border-top:1px solid rgba(200,169,106,0.08);padding-top:28px;display:flex;align-items:center;justify-content:space-between}.footer-copy{font-size:0.72rem;color:var(--w40)}.footer-phone{font-size:0.8rem;color:var(--gold);text-decoration:none;letter-spacing:0.06em}
+@media(max-width:768px){nav{grid-template-columns:1fr auto;padding:20px 24px}.nav-left,.nav-right{display:none}.nav-hamburger{display:flex}.hero{padding:100px 28px 60px;min-height:80svh}.hero-title{font-size:2.6rem}.hero-badges{display:none}.section,.section-sm,.testimonials,.cta-band{padding:48px 24px}.bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}.bc.photo-main{grid-row:span 1;min-height:240px}.features-grid{grid-template-columns:1fr}.t-grid{grid-template-columns:1fr}.cta-band{flex-direction:column;text-align:center;align-items:center}.cta-band-right{align-items:center}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:480px){.hero-title{font-size:2.1rem}.hero-ctas{flex-direction:column;width:100%}.bento{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.section-title{font-size:1.9rem}.cta-band h2{font-size:1.9rem}}
 </style>
 <link rel="canonical" href="https://haventileandstone.com/leland-wilmington.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Haven Tile &amp; Stone">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Haven Tile &amp; Stone">
 <meta property="og:title" content="Tile Installation Leland & Wilmington NC | Haven Tile & Stone">
 <meta property="og:description" content="Custom tile installation for Leland & Wilmington homeowners. Bathroom remodels, kitchen backsplash & whole-home flooring by Haven Tile & Stone. Free consultations.">
 <meta property="og:image" content="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc88de6c7ab9336c0006e.jpeg">
 <meta property="og:url" content="https://haventileandstone.com/leland-wilmington.html">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tile Installation Leland & Wilmington NC | Haven Tile & Stone">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Tile Installation Leland & Wilmington NC | Haven Tile & Stone">
 <meta name="twitter:description" content="Custom tile installation for Leland & Wilmington homeowners. Bathroom remodels, kitchen backsplash & whole-home flooring by Haven Tile & Stone. Free consultations.">
 <meta name="twitter:image" content="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc88de6c7ab9336c0006e.jpeg">
 <script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "@id": "https://haventileandstone.com/#business",
-    "name": "Haven Tile & Stone",
-    "url": "https://haventileandstone.com",
-    "telephone": "+19106647343",
-    "address": {"@type": "PostalAddress", "addressLocality": "Ocean Isle Beach", "addressRegion": "NC", "postalCode": "28469", "addressCountry": "US"},
-    "priceRange": "$$$",
-    "areaServed": [
-      {"@type": "City", "name": "Leland", "containedInPlace": {"@type": "AdministrativeArea", "name": "Brunswick County, NC"}},
-      {"@type": "City", "name": "Wilmington", "containedInPlace": {"@type": "AdministrativeArea", "name": "New Hanover County, NC"}}
-    ],
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "47", "bestRating": "5", "worstRating": "1"}
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://haventileandstone.com/"},
-      {"@type": "ListItem", "position": 2, "name": "Leland & Wilmington", "item": "https://haventileandstone.com/leland-wilmington.html"}
-    ]
-  }
-]
+[{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","@id":"https://haventileandstone.com/#business","name":"Haven Tile & Stone","url":"https://haventileandstone.com","telephone":"+19106647343","address":{"@type":"PostalAddress","addressLocality":"Ocean Isle Beach","addressRegion":"NC","postalCode":"28469","addressCountry":"US"},"priceRange":"$$$","areaServed":[{"@type":"City","name":"Leland","containedInPlace":{"@type":"AdministrativeArea","name":"Brunswick County, NC"}},{"@type":"City","name":"Wilmington","containedInPlace":{"@type":"AdministrativeArea","name":"New Hanover County, NC"}}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"47","bestRating":"5","worstRating":"1"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://haventileandstone.com/"},{"@type":"ListItem","position":2,"name":"Leland & Wilmington","item":"https://haventileandstone.com/leland-wilmington.html"}]}]
 </script>
 </head>
 <body>
-
-<nav id="nav">
-  <a href="mockup-homepage.html" class="nav-logo">Haven <span>&</span> Stone</a>
-  <ul class="nav-links">
-    <li><a href="mockup-homepage.html#services">Services</a></li>
-    <li><a href="gallery.html">Portfolio</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="mockup-homepage.html#locations">Areas Served</a></li>
-    <li><a href="mockup-homepage.html#contact" class="nav-cta">Get a Quote</a></li>
-  </ul>
+<div class="nav-mobile-menu"><button class="nav-mobile-close">✕</button><a href="mockup-homepage.html">Home</a><a href="gallery.html">Gallery</a><a href="about.html">About</a><a href="bathroom-remodeling.html">Bathrooms</a><a href="kitchen-remodeling.html">Kitchens</a><a href="whole-home-flooring.html">Flooring</a><a href="mockup-homepage.html#contact">Contact</a></div>
+<nav>
+  <div class="nav-left"><a class="nav-link" href="gallery.html">Gallery</a><a class="nav-link" href="about.html">About</a><a class="nav-link" href="mockup-homepage.html#services">Services</a></div>
+  <a class="nav-logo" href="mockup-homepage.html">Haven <span>&</span> Stone</a>
+  <div class="nav-right"><a class="nav-link" href="ocean-isle-beach.html">Areas Served</a><a class="nav-link" href="mockup-homepage.html#reviews">Reviews</a><a class="nav-cta" href="mockup-homepage.html#contact">Free Consultation</a></div>
+  <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
-
-<div class="breadcrumb">
-  <a href="mockup-homepage.html">Home</a> &nbsp;/&nbsp; Locations &nbsp;/&nbsp; Leland &amp; Wilmington
-</div>
-
-<section class="hero">
-  <div class="hero-bg"></div>
+<div class="hero">
+  <div class="hero-media"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc88de6c7ab9336c0006e.jpeg" alt="Tile installation Leland and Wilmington NC"></div>
   <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-line"></div>
-    <span class="hero-eyebrow">Leland &amp; Wilmington, NC</span>
-    <h1>Tile Installation<br><em>Leland &amp;</em><br><em>Wilmington</em></h1>
-    <p class="hero-sub">Haven Tile &amp; Stone serves Leland, Wilmington, and the Cape Fear region with the same luxury tile craftsmanship that has made us the go-to contractor along the Brunswick County coast.</p>
-    <div class="hero-actions">
-      <a href="#quote" class="btn-primary">Get a Free Quote</a>
-      <a href="gallery.html" class="btn-ghost">View Our Work</a>
-    </div>
-  </div>
-</section>
-
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <div class="ticker-item"><span class="ticker-dot"></span> Serving Leland, Wilmington &amp; Cape Fear Region</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Licensed &amp; Insured in NC</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Free In-Home Consultations</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> 5-Star Rated on Google</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Bathroom · Kitchen · Pool Deck · Flooring</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Written Warranty on Every Job</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Serving Leland, Wilmington &amp; Cape Fear Region</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Licensed &amp; Insured in NC</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Free In-Home Consultations</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> 5-Star Rated on Google</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Bathroom · Kitchen · Pool Deck · Flooring</div>
-    <div class="ticker-item"><span class="ticker-dot"></span> Written Warranty on Every Job</div>
-  </div>
+  <div class="hero-pill"><div class="hero-pill-dot"></div>Leland &amp; Wilmington, NC</div>
+  <h1 class="hero-title">Serving<br><em>Leland &amp; Wilmington.</em></h1>
+  <p class="hero-sub">From Leland subdivisions to Wilmington's historic districts — luxury tile installation across the Cape Fear region by one dedicated craftsman.</p>
+  <div class="hero-ctas"><a class="btn-primary" href="mockup-homepage.html#contact">Get a Free Consultation</a><a class="btn-ghost" href="gallery.html">View Our Work →</a></div>
+  <div class="hero-badges"><div class="badge"><div class="badge-num">15+</div><div class="badge-lbl">Yrs Experience</div></div><div class="badge"><div class="badge-num">5.0★</div><div class="badge-lbl">Google Rating</div></div><div class="badge"><div class="badge-num">500+</div><div class="badge-lbl">Projects Done</div></div></div>
 </div>
-
-<div class="geo-main" id="quote">
-  <div class="geo-content">
-    <div class="section-label reveal">Leland &amp; Wilmington</div>
-    <h2 class="reveal reveal-delay-1">Luxury Tile Installation<br><em>in the Cape Fear Region</em></h2>
-    <div class="geo-body reveal reveal-delay-2">
-      <p>Leland has become one of the fastest-growing communities in North Carolina, and Wilmington remains the Cape Fear region's premier city for high-end residential real estate. Both communities are home to an increasing number of luxury renovations and new builds — and Haven Tile &amp; Stone serves them both.</p>
-      <p>Located just 30 miles down the coast, Donovan Haven and the Haven Tile &amp; Stone team regularly work in Leland's luxury communities and Wilmington's historic and waterfront neighborhoods. We bring the same precision, quality, and personal service to every project in the Cape Fear region that we're known for throughout Brunswick County.</p>
-      <p>Whether you're in a new Leland community, a historic Wilmington home, or anywhere in between, Haven Tile &amp; Stone can deliver a tile installation that exceeds your expectations. Contact us for a free in-home consultation.</p>
-    </div>
-    <div class="services-grid reveal reveal-delay-2">
-      <div class="service-card">
-        <h3>Bathroom Remodeling</h3>
-        <p>Walk-in showers, heated floors, custom surrounds — your bathroom as a private retreat.</p>
-        <a href="bathroom-remodeling.html">Learn More →</a>
-      </div>
-      <div class="service-card">
-        <h3>Kitchen Tile</h3>
-        <p>Statement backsplashes, floor tile, and custom kitchen layouts for luxury homes.</p>
-        <a href="kitchen-remodeling.html">Learn More →</a>
-      </div>
-      <div class="service-card">
-        <h3>Pool Decks &amp; Outdoor</h3>
-        <p>Slip-resistant pool surrounds, covered patios, and outdoor kitchens built for the coast.</p>
-        <a href="outdoor-pool-decks.html">Learn More →</a>
-      </div>
-      <div class="service-card">
-        <h3>Whole-Home Flooring</h3>
-        <p>Seamless tile flooring across every room — coordinated, precise, and stunning.</p>
-        <a href="whole-home-flooring.html">Learn More →</a>
-      </div>
-    </div>
+<div class="ticker"><div class="ticker-track">Bathroom Remodeling <span class="ticker-sep">✦</span> Kitchen Backsplash <span class="ticker-sep">✦</span> Whole-Home Flooring <span class="ticker-sep">✦</span> Leland NC <span class="ticker-sep">✦</span> Wilmington NC <span class="ticker-sep">✦</span> Cape Fear Region <span class="ticker-sep">✦</span> 5.0 Stars <span class="ticker-sep">✦</span>&nbsp;Bathroom Remodeling <span class="ticker-sep">✦</span> Kitchen Backsplash <span class="ticker-sep">✦</span> Whole-Home Flooring <span class="ticker-sep">✦</span> Leland NC <span class="ticker-sep">✦</span> Wilmington NC <span class="ticker-sep">✦</span> Cape Fear Region <span class="ticker-sep">✦</span> 5.0 Stars <span class="ticker-sep">✦</span>&nbsp;</div></div>
+<section class="section reveal">
+  <div class="section-eyebrow">Leland &amp; Wilmington</div>
+  <h2 class="section-title">Cape Fear.<br><em>Done right.</em></h2>
+  <div class="bento">
+    <div class="bc photo-main"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc88de6c7ab9336c0006e.jpeg" alt="Tile project Leland Wilmington NC"><span class="photo-caption-tag">Custom Install · Cape Fear Region</span></div>
+    <div class="bc accent"><h3>Cape Fear.<br>Done Right.</h3><p>Serving Leland and Wilmington with the same hands-on standard as every project closer to home.</p><span class="bc-arrow">→</span></div>
+    <div class="bc stat"><div class="bc-num">500+</div><div class="bc-num-label">Projects Completed</div></div>
+    <div class="bc service"><div><span class="bc-tag">Services</span><h3>Every room,<br><em>one standard.</em></h3></div><div><p>Bathrooms, kitchens, whole-home flooring — Donovan manages every Leland and Wilmington project from start to finish.</p><a class="bc-link" href="gallery.html">See the Work →</a></div></div>
+    <div class="bc photo-mini"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc8cbb9a348d9a24bf080.jpeg" alt="Tile detail Wilmington NC"></div>
   </div>
-  <div>
-    <div class="sidebar-card">
-      <h3>Request a Free Quote</h3>
-      <p>We'll schedule a free in-home consultation in Leland or Wilmington within 48 hours.</p>
-      <div class="sidebar-form">
-        <label>Your Name</label>
-        <input type="text" placeholder="First and last name">
-        <label>Phone Number</label>
-        <input type="tel" placeholder="(910) 000-0000">
-        <label>Email Address</label>
-        <input type="email" placeholder="your@email.com">
-        <label>Service Needed</label>
-        <select>
-          <option value="">Select a service...</option>
-          <option>Bathroom Remodeling</option>
-          <option>Kitchen Tile &amp; Backsplash</option>
-          <option>Pool Deck &amp; Outdoor Tile</option>
-          <option>Whole-Home Flooring</option>
-          <option>Other / Not Sure</option>
-        </select>
-        <label>Tell Us About Your Project</label>
-        <textarea placeholder="Describe your project — scope, timeline, any materials in mind..."></textarea>
-        <button type="submit">Send Quote Request →</button>
-      </div>
-    </div>
-    <div class="phone-cta">
-      <p>Prefer to talk? Call or text Donovan:</p>
-      <a href="tel:9106647343">(910) 664-7343</a>
-    </div>
+</section>
+<section class="section-sm reveal" style="background:var(--dark-2);border-top:1px solid rgba(200,169,106,0.08)">
+  <div class="section-eyebrow">Services Available</div>
+  <h2 class="section-title">Everything your<br><em>home needs.</em></h2>
+  <div class="features-grid">
+    <div class="feature-item reveal reveal-delay-1"><div class="feature-icon">🚿</div><h3>Bathroom Remodeling</h3><p>Custom tile surrounds, heated floors, niche shelving — full bathroom transformations from demo to grout.</p></div>
+    <div class="feature-item reveal reveal-delay-2"><div class="feature-icon">🍳</div><h3>Kitchen Tile</h3><p>Backsplash installation, floor tile, and countertop surrounds. Precise cuts, perfect patterns.</p></div>
+    <div class="feature-item reveal reveal-delay-3"><div class="feature-icon">🏠</div><h3>Whole-Home Flooring</h3><p>Large-format porcelain and natural stone installed throughout your home with seamless transitions.</p></div>
   </div>
+</section>
+<section class="testimonials reveal">
+  <div class="section-eyebrow">Leland &amp; Wilmington Reviews</div>
+  <h2 class="section-title">What your neighbors<br><em>are saying.</em></h2>
+  <div class="t-grid">
+    <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-quote">"We're in Leland and were nervous about hiring someone from the coast. Donovan came out, gave us a fair quote, and the master bath turned out better than we imagined."</div><div class="t-author">Mark &amp; Julie S. · Leland</div></div>
+    <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-quote">"Hired Donovan for our kitchen backsplash and ended up having him tile our entire main floor. The attention to detail in our Wilmington home is remarkable."</div><div class="t-author">Catherine R. · Wilmington</div></div>
+    <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-quote">"Worth every mile he drives. Our shower and bathroom floor are flawless. Neighbors keep asking who did the tile — we refer Donovan to everyone."</div><div class="t-author">Brian T. · Leland</div></div>
+  </div>
+</section>
+<div class="cta-band reveal">
+  <div><div class="section-eyebrow">Leland &amp; Wilmington</div><h2>Your project starts<br><em>with one call.</em></h2></div>
+  <div class="cta-band-right"><a class="btn-primary" href="tel:+19106647343">Call (910) 664-7343</a><span class="cta-band-sub">Or <a href="https://formspree.io/f/mbdbgpbb">send a message</a> &nbsp;·&nbsp; Free consultation</span></div>
 </div>
-
-<section class="gallery-section">
-  <div class="gallery-section-header reveal">
-    <div class="section-label">Our Work</div>
-    <h2>Projects Near <em>Leland &amp; Wilmington</em></h2>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item reveal"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc88de6c7ab9336c0006e.jpeg" alt="Bathroom tile remodel Leland NC"></div>
-    <div class="gallery-item reveal reveal-delay-1"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/692da54a73043a307bfaa2bd.jpg" alt="Tile flooring Wilmington NC home"></div>
-    <div class="gallery-item reveal reveal-delay-2"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc8cb6cc77d71816e3843.jpeg" alt="Custom tile installation Cape Fear region NC"></div>
-    <div class="gallery-item reveal"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/673bc8cbb9a348d9a24bf080.jpeg" alt="Luxury tile work Leland NC"></div>
-    <div class="gallery-item reveal reveal-delay-1"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/692da54af3ff221b09530512.jpg" alt="Precision tile installation Wilmington NC"></div>
-    <div class="gallery-item reveal reveal-delay-2"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/ybcGWx8BfgvrYufxSFfe/media/6952727fdbb1b375dd9e16da.jpg" alt="Haven Tile Stone project Cape Fear NC"></div>
-  </div>
-</section>
-
-<section class="testimonials-section">
-  <div class="testimonials-section-header reveal">
-    <div class="section-label">Client Stories</div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white)">What Cape Fear Region <em style="font-style:italic;color:var(--gold-lt)">Homeowners Say</em></h2>
-  </div>
-  <div class="tgrid">
-    <div class="tcard reveal reveal-delay-1">
-      <div class="quote-mark">"</div>
-      <div class="stars">★★★★★</div>
-      <blockquote>"We're in a new Leland community and Haven Tile tiled our entire home during construction. Donovan coordinated directly with our builder — the result is seamless from room to room."</blockquote>
-      <div class="author">Andrew &amp; Kim P.</div>
-      <div class="location">Leland — New Construction Whole-Home Tile</div>
-    </div>
-    <div class="tcard reveal reveal-delay-2">
-      <div class="quote-mark">"</div>
-      <div class="stars">★★★★★</div>
-      <blockquote>"Our Wilmington historic home needed a bathroom renovation that respected the character of the house. Donovan understood that immediately and the result feels both modern and timeless."</blockquote>
-      <div class="author">Eleanor R.</div>
-      <div class="location">Wilmington — Historic Home Bathroom Renovation</div>
-    </div>
-    <div class="tcard reveal reveal-delay-3">
-      <div class="quote-mark">"</div>
-      <div class="stars">★★★★★</div>
-      <blockquote>"We had Haven Tile do our kitchen backsplash and master bath. Both look incredible. Donovan is worth the drive from the coast — there's nobody in Wilmington doing tile at this level."</blockquote>
-      <div class="author">Scott &amp; Melissa H.</div>
-      <div class="location">Wilmington — Kitchen &amp; Master Bath Tile</div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-section reveal">
-  <h2>Ready to Start Your<br><em>Leland or Wilmington Project?</em></h2>
-  <p>Call or text Donovan directly, or fill out the quote form above. Free in-home consultations available throughout Leland, Wilmington, and the Cape Fear region.</p>
-  <a href="tel:9106647343" class="btn-primary">(910) 664-7343</a>
-</section>
-
 <footer>
-  <div class="footer-bottom">
-    <span>© 2025 Haven Tile &amp; Stone · Ocean Isle Beach, NC · Licensed &amp; Insured</span>
-    <span><a href="mockup-homepage.html">Home</a> &nbsp;·&nbsp; <a href="gallery.html">Portfolio</a> &nbsp;·&nbsp; <a href="#">Privacy Policy</a></span>
+  <div class="footer-grid">
+    <div class="footer-brand"><h3>Haven <span>&</span> Stone</h3><p>Luxury tile installation for coastal Carolina homeowners. Ocean Isle Beach to Wilmington.</p></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="kitchen-remodeling.html">Kitchen Tile</a></li><li><a href="whole-home-flooring.html">Whole-Home Flooring</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+    <div class="footer-col"><h4>Areas Served</h4><ul><li><a href="ocean-isle-beach.html">Ocean Isle Beach</a></li><li><a href="holden-beach.html">Holden Beach</a></li><li><a href="sunset-beach.html">Sunset Beach</a></li><li><a href="brunswick-county.html">Brunswick County</a></li><li><a href="myrtle-beach.html">Myrtle Beach</a></li><li><a href="calabash.html">Calabash</a></li><li><a href="leland-wilmington.html">Leland &amp; Wilmington</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+19106647343">(910) 664-7343</a></li><li><a href="mailto:donovan@haventileandstone.com">Send a Message</a></li><li><a href="https://g.page/r/CXnR3KwYfLPuEBM/review" target="_blank" rel="noopener">Leave a Review</a></li><li><a href="about.html">About Donovan</a></li></ul></div>
   </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 Haven Tile &amp; Stone · Ocean Isle Beach, NC</span><a class="footer-phone" href="tel:+19106647343">(910) 664-7343</a></div>
 </footer>
-
 <script>
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
-const ro=new IntersectionObserver((e)=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+const nav=document.querySelector('nav');window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const hamburger=document.querySelector('.nav-hamburger'),mobileMenu=document.querySelector('.nav-mobile-menu'),mobileClose=document.querySelector('.nav-mobile-close');
+hamburger.addEventListener('click',()=>mobileMenu.classList.add('open'));mobileClose.addEventListener('click',()=>mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
 </script>
 </body>
 </html>
